@@ -27,6 +27,47 @@ enum ProcessorStatus{
   NEGATIVE       = 7
 };
 
+// enum ProcessorStatusMask{
+//   CARRY          = 1 << 0,
+//   ZERO           = 1 << 1,
+//   IRQB_DISABLE   = 1 << 2,
+//   DECIMAL        = 1 << 3,
+//   BRK            = 1 << 4,
+//   ONE            = 1 << 5,
+//   OVERFLOW       = 1 << 6,
+//   NEGATIVE       = 1 << 7
+// };
+
+class StackPointerRegister : public Register<Word>
+{
+  public:
+    StackPointerRegister& operator++() // prefix increment
+    {
+        ++value;
+        return *this; // return new value by reference
+    }
+
+    StackPointerRegister operator++(int) // postfix increment
+    {
+        StackPointerRegister old = *this; // copy old value
+        operator++();  // prefix increment
+        return old;    // return old value
+    }
+        
+    StackPointerRegister& operator--() // prefix decrement
+    {
+        --value;
+        return *this; // return new value by reference
+    }
+
+    StackPointerRegister operator--(int) // postfix decrement
+    {
+        StackPointerRegister old = *this; // copy old value
+        operator--();  // prefix decrement
+        return old;    // return old value
+    }
+};
+
 class ProcessorStatusRegister : public Register<Word>
 {
   public:

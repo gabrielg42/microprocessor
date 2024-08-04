@@ -1,0 +1,8 @@
+enum Instruction
+{
+}
+
+class InstructionDecoder
+{
+    
+}
